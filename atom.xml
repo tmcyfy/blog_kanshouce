@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kanshouce.com/"/>
-  <updated>2017-12-22T08:42:29.000Z</updated>
+  <updated>2017-12-22T09:02:09.000Z</updated>
   <id>https://www.kanshouce.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://www.kanshouce.com/2017/12/22/theFreeTLS/"/>
     <id>https://www.kanshouce.com/2017/12/22/theFreeTLS/</id>
     <published>2017-12-22T08:23:43.000Z</published>
-    <updated>2017-12-22T08:42:29.000Z</updated>
+    <updated>2017-12-22T09:02:09.000Z</updated>
     
-    <content type="html"><![CDATA[<p>免费证书如果是阿里云的主机直接申请铁门塞克的1年免费版是极方便的，申请下来后因为在阿里自己的系统内，可以直接面向相对应的产品进行推送，到期后还有自动提醒等等等，服务非常周到，可以看出阿里云一直在打造自己的全家桶。</p>
+    <content type="html"><![CDATA[<p>免费证书如果是阿里云的主机直接申请铁门塞克的1年免费版是极方便的，申请下来后因为在阿里自己的系统内，可以直接面向相对应的产品进行推送，到期后还有自动提醒等等等，服务非常周到，可以看出阿里云一直在打造自己的全家桶。 </p>
 <p>如果不使用阿里云主机的情况下，可以使用本教程生成证书。</p>
 <p>证书认证机构为 <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a>。 证书的生成有许多方法，这里使用的是比较简单的方法：使用 <a href="https://github.com/Neilpang/acme.sh" target="_blank" rel="external">acme.sh</a> 脚本生成，本部分说明部分内容参考于<a href="https://github.com/Neilpang/acme.sh/blob/master/README.md" target="_blank" rel="external">acme.sh README</a>。</p>
 <p>证书有两种，一种是 ECC 证书（内置公钥是 ECDSA 公钥），一种是 RSA 证书（内置 RSA 公钥）。简单来说，同等长度 ECC 比 RSA 更安全,也就是说在具有同样安全性的情况下，ECC 的密钥长度比 RSA 短得多（加密解密会更快）。但问题是 ECC 的兼容性会差一些，Android 4.x 以下和 Windows XP 不支持。只要您的设备不是非常老的老古董，强烈建议使用 ECC 证书。</p>
@@ -47,8 +47,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;免费证书如果是阿里云的主机直接申请铁门塞克的1年免费版是极方便的，申请下来后因为在阿里自己的系统内，可以直接面向相对应的产品进行推送，到期后还有自动提醒等等等，服务非常周到，可以看出阿里云一直在打造自己的全家桶。&lt;/p&gt;
-&lt;p&gt;如果不使用阿里云主机的情况下，可以使用本教程生
+      &lt;p&gt;免费证书如果是阿里云的主机直接申请铁门塞克的1年免费版是极方便的，申请下来后因为在阿里自己的系统内，可以直接面向相对应的产品进行推送，到期后还有自动提醒等等等，服务非常周到，可以看出阿里云一直在打造自己的全家桶。 &lt;/p&gt;
+&lt;p&gt;如果不使用阿里云主机的情况下，可以使用本教程
     
     </summary>
     
@@ -651,7 +651,7 @@
     <published>2017-08-11T17:33:42.000Z</published>
     <updated>2017-08-11T18:12:30.000Z</updated>
     
-    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX19YzgpNbQ29bJdTdW92oIgiqHokO+42Al7guJo5pwe/D4SOPncspiOadhWjR2eMokXoCz/Si3U+M7WKx/oh+feTGGw0dEsRjnJwsZIOlJWdzayxUDG/jJJ1/2ZU7o/13kLZ1yRjjzPwQMWX5ZWcgMXH9ibPoNGUHg9b1UxCFo61v94sblGNJ31/T7S18H+ND5TgpjVHXXInO6ouObwfv0zUz7ZY1UfKHE0jf/c+5677Zhkk+gyJQAvd </div>]]></content>
+    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX189LpwkYhNtLQjFNUqPSPvPQ9VJCMCtKBFX9IkbU3YWMPT8KS8+eAQ5Y7W2r4uv3YW2Jb7buyVdpH9ZH8fUPQcZtbENKs4GFVK6iwA0KBkbDS7G/8J99yew56cQvtYK6xw8USUzW+/zsXkmgbP23eQTGQigDS97FgftFgsDZru3uQi4a1o+rhZ66AjVBQXm+BY+hZdDyhMI1AobHfvYbsBxab1HovYHubQ/jYU0MRZNbgqhieJ9IgFO </div>]]></content>
     
     <summary type="html">
     
