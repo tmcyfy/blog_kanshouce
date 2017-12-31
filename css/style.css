@@ -704,7 +704,7 @@ a.btn {
   text-align: center;
   padding-top: 50px;
 }
-@media screen and (max-width: 1024px, max-height: 1366px) {
+@media screen and (max-width: 1024px) {
   .crown {
       float: right;
       position: fixed;
