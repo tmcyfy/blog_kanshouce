@@ -670,6 +670,9 @@ a.btn {
     border-right: none;
     z-index: 1;
   }
+  .crown {
+    display: none;
+  }
   .sidebar .logo-title {
     padding-top: 120px;
   }
