@@ -145,7 +145,6 @@ a:hover, a:active {
     height: auto;
     margin-top: -26%;
     margin-left: 64%;
-    position: absolute;
 }
 
 .content {
@@ -691,6 +690,46 @@ a.btn {
 .page_404 {
   text-align: center;
   padding-top: 50px;
+}
+@media screen and (max-width: 1024px) {
+  .crown {
+      float: right;
+      position: fixed;
+      width: 9%;
+      height: 5%;
+      /* border: 1px solid #e6e6e6; */
+      margin-top: 10%;
+      margin-left: 32.5%;
+      z-index: 999;
+  }
+  .crown .content {
+      width: 98%;
+      height: 90%;
+      margin: 1px;
+      border: 1px solid #e6e6e6;
+      z-index: 998;
+      background: #C7A85A;
+  }
+  .crown .content .item {
+      line-height: 5px;
+      margin-top: 0.6em;
+      margin-left: 0.6em;
+      color: #fff;
+      font-weight: 500;
+  }
+  .crown .content .year {
+      line-height: 5px;
+      margin-top: 1em;
+      margin-left: 0.6em;
+      color: #fff;
+  }
+
+  .crown .content .photo {
+      max-width: 34%;
+      height: auto;
+      margin-top: -26%;
+      margin-left: 64%;
+  }
 }
 
 @media screen and (max-width: 960px) {
