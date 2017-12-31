@@ -141,9 +141,11 @@ a:hover, a:active {
 }
 
 .crown .content .photo {
-    max-width: 35%;
+    max-width: 34%;
     height: auto;
-    margin-top: -10em;
+    margin-top: -26%;
+    margin-left: 64%;
+    position: absolute;
 }
 
 .content {
