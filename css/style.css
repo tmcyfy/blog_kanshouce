@@ -115,8 +115,12 @@ a:hover, a:active {
     height: 5%;
     border: 1px solid #e6e6e6;
     margin-top: 10%;
-    margin-left: 32%;
+    margin-left: 32.5%;
     z-index: 999;
+}
+.crown-content {
+    border: 1px solid #e6e6e6;
+    z-index: 998;
 }
 .content {
   height: auto;
