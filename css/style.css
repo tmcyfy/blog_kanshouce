@@ -704,15 +704,15 @@ a.btn {
   text-align: center;
   padding-top: 50px;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px, max-height: 1366px) {
   .crown {
       float: right;
       position: fixed;
-      width: 16%;
+      width: 21%;
       height: 3.4%;
       /* border: 1px solid #e6e6e6; */
       margin-top: 10%;
-      margin-left: 25.5%;
+      margin-left: 20%;
       z-index: 999;
   }
   .crown .content {
@@ -736,12 +736,22 @@ a.btn {
       margin-left: 0.6em;
       color: #fff;
   }
+  .crown .content .count {
+    line-height: 5px;
+    margin-top: -13.5%;
+    margin-left: 41%;
+    color: #fff;
+    font-weight: 200;
+    font-size: 38px;
+    vertical-align: middle;
+    font-family: sans-serif;
+}
 
   .crown .content .photo {
-      max-width: 38.7%;
+      max-width: 30%;
       height: auto;
       margin-top: -28.5%;
-      margin-left: 61%;
+      margin-left: 67%;
       position: absolute;
   }
 }
