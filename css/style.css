@@ -118,7 +118,7 @@ a:hover, a:active {
     margin-left: 32.5%;
     z-index: 999;
 }
-.crown-content {
+.crown .content {
     border: 1px solid #e6e6e6;
     z-index: 998;
 }
