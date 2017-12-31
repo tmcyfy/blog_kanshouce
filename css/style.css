@@ -145,6 +145,7 @@ a:hover, a:active {
     height: auto;
     margin-top: -26%;
     margin-left: 64%;
+    position: absolute;
 }
 
 .content {
@@ -695,11 +696,11 @@ a.btn {
   .crown {
       float: right;
       position: fixed;
-      width: 9%;
-      height: 5%;
+      width: 16%;
+      height: 3.4%;
       /* border: 1px solid #e6e6e6; */
       margin-top: 10%;
-      margin-left: 32.5%;
+      margin-left: 25.5%;
       z-index: 999;
   }
   .crown .content {
@@ -725,10 +726,11 @@ a.btn {
   }
 
   .crown .content .photo {
-      max-width: 34%;
+      max-width: 38.7%;
       height: auto;
-      margin-top: -26%;
-      margin-left: 64%;
+      margin-top: -28.5%;
+      margin-left: 61%;
+      position: absolute;
   }
 }
 
