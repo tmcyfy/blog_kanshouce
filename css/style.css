@@ -111,7 +111,7 @@ a:hover, a:active {
 .crown {
     float: right;
     position: fixed;
-    width: 8%;
+    width: 9.5%;
     height: 5%;
     /* border: 1px solid #e6e6e6; */
     margin-top: 10%;
@@ -125,6 +125,8 @@ a:hover, a:active {
     border: 1px solid #e6e6e6;
     z-index: 998;
     background: #C7A85A;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 .crown .content .item {
     line-height: 5px;
@@ -141,10 +143,10 @@ a:hover, a:active {
 }
 
 .crown .content .photo {
-    max-width: 34%;
+    max-width: 29%;
     height: auto;
-    margin-top: -26%;
-    margin-left: 64%;
+    margin-top: -22%;
+    margin-left: 69%;
     position: absolute;
 }
 
