@@ -124,16 +124,20 @@ a:hover, a:active {
     margin: 1px;
     border: 1px solid #e6e6e6;
     z-index: 998;
+    background: #C7A85A;
 }
 .crown .content .item {
     line-height: 5px;
     margin-top: 0.6em;
     margin-left: 0.6em;
+    color: #fff;
+    font-weight: 500;
 }
 .crown .content .year {
     line-height: 5px;
     margin-top: 1em;
     margin-left: 0.6em;
+    color: #fff;
 }
 
 .content {
