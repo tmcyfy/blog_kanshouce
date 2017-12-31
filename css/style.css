@@ -119,6 +119,9 @@ a:hover, a:active {
     z-index: 999;
 }
 .crown .content {
+    width: 98%;
+    height: 90%;
+    margin: 1px;
     border: 1px solid #e6e6e6;
     z-index: 998;
 }
