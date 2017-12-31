@@ -141,6 +141,12 @@ a:hover, a:active {
     margin-left: 0.6em;
     color: #fff;
 }
+.crown .content .count {
+    line-height: 5px;
+    margin-top: 1em;
+    margin-left: 0.6em;
+    color: #fff;
+}
 
 .crown .content .photo {
     max-width: 29%;
