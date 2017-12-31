@@ -108,6 +108,16 @@ a:hover, a:active {
 }
 
 /*animation ends*/
+.crown {
+    float: right;
+    position: fixed;
+    width: 200px;
+    height: 48px;
+    background:  red;
+    margin-top: 10%;
+    margin-left: 31%;
+    z-index: 999;
+}
 .content {
   height: auto;
   float: right;
