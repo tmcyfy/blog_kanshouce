@@ -125,6 +125,17 @@ a:hover, a:active {
     border: 1px solid #e6e6e6;
     z-index: 998;
 }
+.crown .content .item {
+    line-height: 5px;
+    margin-top: 0.6em;
+    margin-left: 0.6em;
+}
+.crown .content .year {
+    line-height: 5px;
+    margin-top: 1em;
+    margin-left: 0.6em;
+}
+
 .content {
   height: auto;
   float: right;
