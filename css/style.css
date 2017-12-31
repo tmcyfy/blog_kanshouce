@@ -111,8 +111,8 @@ a:hover, a:active {
 .crown {
     float: right;
     position: fixed;
-    width: 200px;
-    height: 48px;
+    width: 8%;
+    height: 5%;
     background:  red;
     margin-top: 10%;
     margin-left: 31%;
