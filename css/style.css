@@ -113,7 +113,7 @@ a:hover, a:active {
     position: fixed;
     width: 8%;
     height: 5%;
-    border: 1px solid #e6e6e6;
+    /* border: 1px solid #e6e6e6; */
     margin-top: 10%;
     margin-left: 32.5%;
     z-index: 999;
