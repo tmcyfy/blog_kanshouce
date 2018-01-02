@@ -111,16 +111,16 @@ a:hover, a:active {
 .crown {
     float: right;
     position: fixed;
-    width: 9.5%;
-    height: 3.6%;
+    width: 212.797px;
+    height: 44.2344px;
     /* border: 1px solid #e6e6e6; */
     margin-top: 10%;
     margin-left: 31%;
     z-index: 999;
 }
 .crown .content {
-    width: 98%;
-    height: 90%;
+    width: 208.531px;
+    height: 39.7969px;
     margin: 1px;
     border: 1px solid #e6e6e6;
     z-index: 998;
@@ -154,7 +154,7 @@ a:hover, a:active {
 
 .crown .content .photo {
     max-width: 29%;
-    height: auto;
+    height: 40.4531px;
     margin-top: -29%;
     margin-left: 69%;
     position: absolute;
