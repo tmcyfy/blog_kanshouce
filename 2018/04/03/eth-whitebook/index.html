@@ -2,6 +2,53 @@
 当中本聪在2009年1月启动比特币区块链时，他同时向世界引入了两种未经测试的革命性的新概念。第一种就是比特币（bitcoin），一种去中心化的点对点的网上货币，在没有任何资产担保、内在价值或者中心发行者的情况下维持着价值。到目前为止，比"><meta name="keywords" content="Life,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">手册</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><div class="by_farbox"><a href="#">粤ICP备13034981号-2</a><div class="by_farbox"></div><sine>2016</sine></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li><li><a href="/reader">阅读者</a></li><li><a href="/node">Node</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Ethereum以太坊白皮书 中文译版</a></h3></div><div class="post-content"><p>以太坊（Ethereum ）:下一代智能合约和去中心化应用平台</p>
 <p>当中本聪在2009年1月启动比特币区块链时，他同时向世界引入了两种未经测试的革命性的新概念。第一种就是比特币（bitcoin），一种去中心化的点对点的网上货币，在没有任何资产担保、内在价值或者中心发行者的情况下维持着价值。到目前为止，比特币已经吸引了大量的公众注意力, 就政治方面而言它是一种没有中央银行的货币并且有着剧烈的价格波动。然而，中本聪的伟大试验还有与比特币同等重要的一部分：基于工作量证明的区块链概念使得人们可以就交易顺序达成共识。作为应用的比特币可以被描述为一个先申请（first-to-file）系统：如果某人有50BTC并且同时向A和B发送这50BTC，只有被首先被确认的交易才会生效。没有固有方法可以决定两笔交易哪一笔先到，这个问题阻碍了去中心化数字货币的发展许多年。中本聪的区块链是第一个可靠的去中心化解决办法。现在，开发者们的注意力开始迅速地转向比特币技术的第二部分，区块链怎样应用于货币以外的领域。</p>
 <p>常被提及的应用包括使用链上数字资产来代表定制货币和金融工具（彩色币），某种基础物理设备的所有权（智能资产），如域名一样的没有可替代性的资产（域名币）以及如去中心化交易所，金融衍生品，点到点赌博和链上身份和信誉系统等更高级的应用。另一个常被问询的重要领域是“智能合约”- 根据事先任意制订的规则来自动转移数字资产的系统。例如，一个人可能有一个存储合约，形式为“A可以每天最多提现X个币，B每天最多Y个，A和B一起可以随意提取，A可以停掉B的提现权”。这种合约的符合逻辑的扩展就是去中心化自治组织（DAOs）-长期的包含一个组织的资产并把组织的规则编码的智能合约。以太坊的目标就是提供一个带有内置的成熟的图灵完备语言的区块链，用这种语言可以创建合约来编码任意状态转换功能，用户只要简单地用几行代码来实现逻辑，就能够创建以上提及的所有系统以及许多我们还想象不到的的其它系统。</p>
+<div class="toc">
+
+<!-- toc -->
+<ul>
+<li><a href="#li-shi">历史</a><ul>
+<li><a href="#zuo-wei-zhuang-tai-zhuan-huan-xi-tong-de-bi-te-bi">作为状态转换系统的比特币</a></li>
+<li><a href="#wa-kuang">挖矿</a></li>
+<li><a href="#mo-ke-er-shu">默克尔树</a></li>
+<li><a href="#qi-ta-de-qu-kuai-lian-ying-yong">其它的区块链应用</a></li>
+<li><a href="#jiao-ben">脚本</a></li>
+</ul>
+</li>
+<li><a href="#yi-tai-fang">以太坊</a><ul>
+<li><a href="#yi-tai-fang-zhang-hu">以太坊账户</a></li>
+<li><a href="#xiao-xi-he-jiao-yi">消息和交易</a></li>
+<li><a href="#yi-tai-fang-zhuang-tai-zhuan-huan-han-shu">以太坊状态转换函数</a></li>
+<li><a href="#dai-ma-zhi-xing">代码执行</a></li>
+<li><a href="#qu-kuai-lian-he-wa-kuang">区块链和挖矿</a></li>
+<li><a href="#jin-rong-yan-sheng-pin-he-jie-zhi-wen-ding-de-huo-bi">金融衍生品和价值稳定的货币</a></li>
+<li><a href="#shen-fen-he-xin-yu-xi-tong">身份和信誉系统</a></li>
+<li><a href="#qu-zhong-xin-hua-cun-chu">去中心化存储</a></li>
+<li><a href="#qu-zhong-xin-hua-zi-zhi-zu-zhi">去中心化自治组织</a></li>
+<li><a href="#jin-yi-bu-de-ying-yong">进一步的应用</a></li>
+</ul>
+</li>
+<li><a href="#za-xiang-he-guan-zhu">杂项和关注</a><ul>
+<li><a href="#gai-jin-ban-you-ling-xie-yi-de-shi-shi">改进版幽灵协议的实施</a></li>
+<li><a href="#fei-yong">费用</a></li>
+<li><a href="#ji-suan-he-tu-ling-wan-bei">计算和图灵完备</a></li>
+<li><a href="#huo-bi-he-fa-xing">货币和发行</a></li>
+<li><a href="#fa-xing-fen-jie">发行分解</a></li>
+<li><a href="#wa-kuang-de-zhong-xin-hua">挖矿的中心化</a></li>
+<li><a href="#kuo-zhan-xing">扩展性</a></li>
+</ul>
+</li>
+<li><a href="#zong-shu-qu-zhong-xin-hua-ying-yong">综述：去中心化应用</a></li>
+<li><a href="#jie-lun">结论</a></li>
+<li><a href="#zhu-jie-yu-jin-jie-yue-du">注解与进阶阅读</a><ul>
+<li><a href="#zhu-jie">注解</a></li>
+<li><a href="#jin-jie-yue-du">进阶阅读</a></li>
+<li><a href="#jin-jie-yue-du-1">进阶阅读</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+</div>
+
 <h1><span id="li-shi">历史</span></h1><p>去中心化的数字货币概念，正如财产登记这样的替代应用一样，早在几十年以前就被提出来了。1980和1990年代的匿名电子现金协议，大部分是以乔姆盲签技术（Chaumian blinding）为基础的。这些电子现金协议提供具有高度隐私性的货币，但是这些协议都没有流行起来，因为它们都依赖于一个中心化的中介机构。1998年，戴伟（Wei Dai）的b-money首次引入了通过解决计算难题和去中心化共识创造货币的思想，但是该建议并未给出如何实现去中心化共识的具体方法。2005年，芬尼（Hal Finney）引入了“可重复使用的工作量证明机制”（reusable proofs of work）概念，它同时使用b-money的思想和Adam Back提出的计算困难的哈希现金（Hashcash）难题来创造密码学货币。但是，这种概念再次迷失于理想化，因为它依赖于可信任的计算作为后端。</p>
 <p>因为货币是一个先申请应用，交易的顺序至关重要，所以去中心化的货币需要找到实现去中心化共识的方法。比特币以前的所有电子货币协议所遇到的主要障碍是，尽管对如何创建安全的拜占庭问题容错（Byzantine-fault-tolerant）多方共识系统的研究已经历时多年，但是上述协议只解决了问题的一半。这些协议假设系统的所有参与者是已知的，并产生如“如果有N方参与到系统中，那么系统可以容忍N/4的恶意参与者”这样形式的安全边界。然而这个假设的问题在于，在匿名的情况下，系统设置的安全边界容易遭受女巫攻击，因为一个攻击者可以在一台服务器或者僵尸网络上创建数以千计的节点，从而单方面确保拥有多数份额。</p>
 <p>中本聪的创新是引入这样一个理念：将一个非常简单的基于节点的去中心化共识协议与工作量证明机制结合在一起。节点通过工作量证明机制获得参与到系统的权利，每十分钟将交易打包到“区块”中，从而创建出不断增长的区块链。拥有大量算力的节点有更大的影响力，但获得比整个网络更多的算力比创建一百万个节点困难得多。尽管比特币区块链模型非常简陋，但是实践证明它已经足够好用了，在未来五年，它将成为全世界两百个以上的货币和协议的基石。</p>
@@ -22,7 +69,7 @@
 <li>如果所有的UTXO输入面值总额小于所有的UTXO输出面值总额，返回错误提示</li>
 <li>返回新状态<code>S’</code>,新状态S中移除了所有的输入UTXO，增加了所有的输出UTXO。</li>
 </ol>
-<p>第一步的第一部分防止交易的发送者花费不存在的比特币，第二部分防止交易的发送者花费其他人的比特币。第二步确保价值守恒。比特币的支付协议如下。假设Alice想给Bob发送11.7BTC。事实上，Alice不可能正好有11.7BTC。假设，她能得到的最小数额比特币的方式是：6+4+2=12。所以，她可以创建一笔有3个输入，2个输出的交易。第一个输出的面值是11.7BTC，所有者是Bob（Bob的比特币地址），第二个输出的面值是0.3BTC，所有者是Alice自己，也就是找零。</p>
+<p>第一步的第一部分防止交易的发送者花费不存在的比特币，第二部分防止交易的发送者花费其他人的比特币。第二步确保价值守恒。比特币的支付协议如下。假设Alice想给Bob发送11.7BTC。事实上，Alice不可能正好有11.7BTC。假设，她能得到的最小数额比特币的方式是：<code>6+4+2=12</code>。所以，她可以创建一笔有3个输入，2个输出的交易。第一个输出的面值是11.7BTC，所有者是Bob（Bob的比特币地址），第二个输出的面值是0.3BTC，所有者是Alice自己，也就是找零。</p>
 <h2><span id="wa-kuang">挖矿</span></h2><p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpztr9d4tmj30tu09ct9a.jpg" alt=""></p>
 <p>一个区块，每个区块包含一个时间戳、一个随机数、一个对上一个区块的引用（即哈希）和上一区块生成以来发生的所有交易列表。这样随着时间流逝就创建出了一个持续增长的区块链，它不断地更新，从而能够代表比特币账本的最新状态。</p>
 <p>依照这个范式，检查一个区块是否有效的算法如下：</p>
@@ -88,16 +135,22 @@
 <li>如果因为发送者账户没有足够的钱或者代码执行耗尽瓦斯导致价值转移失败，恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。</li>
 <li><p>否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 例如，假设合约的代码如下：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if !self.storage[calldataload(0)]:</div><div class="line">self.storage[calldataload(0)] = calldataload(32)</div></pre></td></tr></table></figure>
-<p> 需要注意的是，在现实中合约代码是用底层以太坊虚拟机（EVM）代码写成的。上面的合约是用我们的高级语言Serpent语言写成的，它可以被编译成EVM代码。假设合约存储器开始时是空的，一个值为10以太，瓦斯为2000，瓦斯价格为0.001以太并且64字节数据，第一个三十二字节的快代表号码2和第二个代表词CHARLIE。的交易发送后，状态转换函数的处理过程如下：</p>
-<pre><code>1. 检查交易是否有效、格式是否正确。
-2. 检查交易发送者至少有`2000*0.001=2`个以太币。如果有，从发送者账户中减去2个以太币。
-3. 初始设定`gas=2000`,假设交易长为170字节，每字节的费用是5，减去850，所以还剩1150。
-4. 从发送者账户减去10个以太币，为合约账户增加10个以太币。
-5. 运行代码。在这个合约中，运行代码很简单：它检查合约存储器索引为2处是否已使用，注意到它未被使用，然后将其值置为CHARLIE。假设这消耗了187单位的瓦斯，于是剩余的瓦斯为`1150 - 187 = 963`.
-6. 向发送者的账户增加`963*0.001=0.963`个以太币，返回最终状态。 如果没有合约接收交易，那么所有的交易费用就等于GASPRICE乘以交易的字节长度，交易的数据就与交易费用无关了。另外，需要注意的是，合约发起的消息可以对它们产生的计算分配瓦斯限额，如果子计算的瓦斯用完了，它只恢复到消息发出时的状态。因此，就像交易一样，合约也可以通过对它产生的子计算设置严格的限制，保护它们的计算资源。
-</code></pre></li>
+</li>
 </ol>
-<h2><span id="dai-ma-zhi-xing">代码执行</span></h2><p>以太坊合约的代码使用低级的基于堆栈的字节码的语言写成的，被称为“以太坊虚拟机代码”或者“EVM代码”。代码由一系列字节构成，每一个字节代表一种操作。一般而言，代码执行是无限循环，程序计数器每增加一（初始值为零）就执行一次操作，直到代码执行完毕或者遇到错误，<code>STOP</code>或者<code>RETURN</code>指令。操作可以访问三种存储数据的空间：</p>
+<pre><code>需要注意的是，在现实中合约代码是用底层以太坊虚拟机（EVM）代码写成的。上面的合约是用我们的高级语言Serpent语言写成的，它可以被编译成EVM代码。假设合约存储器开始时是空的，一个值为10以太，瓦斯为2000，瓦斯价格为0.001以太并且64字节数据，第一个三十二字节的快代表号码2和第二个代表词CHARLIE。的交易发送后，状态转换函数的处理过程如下：
+
+1. 检查交易是否有效、格式是否正确。
+
+2. 检查交易发送者至少有`2000*0.001=2`个以太币。如果有，从发送者账户中减去2个以太币。
+
+3. 初始设定`gas=2000`,假设交易长为170字节，每字节的费用是5，减去850，所以还剩1150。
+
+4. 从发送者账户减去10个以太币，为合约账户增加10个以太币。
+
+5. 运行代码。在这个合约中，运行代码很简单：它检查合约存储器索引为2处是否已使用，注意到它未被使用，然后将其值置为CHARLIE。假设这消耗了187单位的瓦斯，于是剩余的瓦斯为`1150 - 187 = 963`.
+
+6. 向发送者的账户增加`963*0.001=0.963`个以太币，返回最终状态。 如果没有合约接收交易，那么所有的交易费用就等于GASPRICE乘以交易的字节长度，交易的数据就与交易费用无关了。另外，需要注意的是，合约发起的消息可以对它们产生的计算分配瓦斯限额，如果子计算的瓦斯用完了，它只恢复到消息发出时的状态。因此，就像交易一样，合约也可以通过对它产生的子计算设置严格的限制，保护它们的计算资源。
+</code></pre><h2><span id="dai-ma-zhi-xing">代码执行</span></h2><p>以太坊合约的代码使用低级的基于堆栈的字节码的语言写成的，被称为“以太坊虚拟机代码”或者“EVM代码”。代码由一系列字节构成，每一个字节代表一种操作。一般而言，代码执行是无限循环，程序计数器每增加一（初始值为零）就执行一次操作，直到代码执行完毕或者遇到错误，<code>STOP</code>或者<code>RETURN</code>指令。操作可以访问三种存储数据的空间：</p>
 <ul>
 <li><strong>堆栈</strong>，一种后进先出的数据存储，32字节的数值可以入栈，出栈。</li>
 <li><strong>内存</strong>，可无限扩展的字节队列。</li>
@@ -308,4 +361,4 @@
 <li><p>Peter Todd on Merkle sum trees:<a href="http://sourceforge.net/p/bitcoin/mailman/message/31709140/" target="_blank" rel="external">http://sourceforge.net/p/bitcoin/mailman/message/31709140/</a></p>
 </li>
 </ol>
-</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-04-03</span><i class="fa fa-tag"></i></div></div></div></div><div class="mailcommint">请注意：我们关闭了评论，因为采用邮件或许交流速度更快。 Click ><a href="mailto:liuqichao@liuqichao.com?subject=Commint: Ethereum以太坊白皮书 中文译版" class="a">Send Mail</a></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://www.kanshouce.com/2018/04/03/eth-whitebook/,手册,Ethereum以太坊白皮书 中文译版,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/12/22/theFreeTLS/" title="用脚本acme申请Let's Encrypt免费证书（极简版）" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/custom.js"></script></body></html>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-04-03</span><i class="fa fa-tag"></i><a href="/tags/ETH/" title="ETH" class="tag">ETH </a><a href="/tags/Ethereum/" title="Ethereum" class="tag">Ethereum </a><a href="/tags/blockchain/" title="blockchain" class="tag">blockchain </a></div></div></div></div><div class="mailcommint">请注意：我们关闭了评论，因为采用邮件或许交流速度更快。 Click ><a href="mailto:liuqichao@liuqichao.com?subject=Commint: Ethereum以太坊白皮书 中文译版" class="a">Send Mail</a></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://www.kanshouce.com/2018/04/03/eth-whitebook/,手册,Ethereum以太坊白皮书 中文译版,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a role="navigation" href="/2017/12/22/theFreeTLS/" title="用脚本acme申请Let's Encrypt免费证书（极简版）" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/custom.js"></script></body></html>
