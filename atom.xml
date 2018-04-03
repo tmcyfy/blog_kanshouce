@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kanshouce.com/"/>
-  <updated>2018-04-03T15:21:36.000Z</updated>
+  <updated>2018-04-03T15:24:12.000Z</updated>
   <id>https://www.kanshouce.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://www.kanshouce.com/2018/04/03/eth-whitebook/"/>
     <id>https://www.kanshouce.com/2018/04/03/eth-whitebook/</id>
     <published>2018-04-03T14:06:22.000Z</published>
-    <updated>2018-04-03T15:21:36.000Z</updated>
+    <updated>2018-04-03T15:24:12.000Z</updated>
     
     <content type="html"><![CDATA[<p>以太坊（Ethereum ）:下一代智能合约和去中心化应用平台</p>
 <p>当中本聪在2009年1月启动比特币区块链时，他同时向世界引入了两种未经测试的革命性的新概念。第一种就是比特币（bitcoin），一种去中心化的点对点的网上货币，在没有任何资产担保、内在价值或者中心发行者的情况下维持着价值。到目前为止，比特币已经吸引了大量的公众注意力, 就政治方面而言它是一种没有中央银行的货币并且有着剧烈的价格波动。然而，中本聪的伟大试验还有与比特币同等重要的一部分：基于工作量证明的区块链概念使得人们可以就交易顺序达成共识。作为应用的比特币可以被描述为一个先申请（first-to-file）系统：如果某人有50BTC并且同时向A和B发送这50BTC，只有被首先被确认的交易才会生效。没有固有方法可以决定两笔交易哪一笔先到，这个问题阻碍了去中心化数字货币的发展许多年。中本聪的区块链是第一个可靠的去中心化解决办法。现在，开发者们的注意力开始迅速地转向比特币技术的第二部分，区块链怎样应用于货币以外的领域。</p>
@@ -1038,7 +1038,7 @@
     <published>2017-08-11T17:33:42.000Z</published>
     <updated>2017-08-11T18:12:30.000Z</updated>
     
-    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX1+m/rF1nBf/OiDtsdMPqlHd93a/59W2eK0V6gY7rdNYRectgOMRyp/9D9lgc3eDC5iMnl3jhbGm+eP+JPepg0eN4bJ+T/ZY3i5kkgdogmWAKf4Clow3KG+dN4lPoOBY6sYPG2g8QkgQy0vEGVjE2GuyroCZp586vmvXVzj91NHXR5KP/qcLJr0pshQuJ312HRnvibyCVhpwSrz7Of3OMi3AL9++zZwHNwpKZTjk+qprn4IavFPQHU98 </div>]]></content>
+    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX19Q2dD4SOG6AgnmIYHtq8XPAaJB0HpfiU5iB3WeMUS4TBr6wUQDgDrV8ptwHGpMtgoFQY/wJnBRXpsOjDVnPKhnrnaeWd3fyk3j+54jaI0vgvaOWO94vWDQMzo/HbHktc/GIE2q3jJuLXuTtQnfLMKUtT/2obfrudkbaZ1cI5bpC57WUC8+Pbwkvf9qXp5rUg+Gp9QPyfIKW7JoAy5ECq+3W9tmhucwjLWI+fwsJt4s/5mXZSUiHV4f </div>]]></content>
     
     <summary type="html">
     
