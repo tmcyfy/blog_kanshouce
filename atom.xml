@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kanshouce.com/"/>
-  <updated>2018-04-03T15:24:12.000Z</updated>
+  <updated>2018-04-03T15:26:20.000Z</updated>
   <id>https://www.kanshouce.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://www.kanshouce.com/2018/04/03/eth-whitebook/"/>
     <id>https://www.kanshouce.com/2018/04/03/eth-whitebook/</id>
     <published>2018-04-03T14:06:22.000Z</published>
-    <updated>2018-04-03T15:24:12.000Z</updated>
+    <updated>2018-04-03T15:26:20.000Z</updated>
     
     <content type="html"><![CDATA[<p>以太坊（Ethereum ）:下一代智能合约和去中心化应用平台</p>
 <p>当中本聪在2009年1月启动比特币区块链时，他同时向世界引入了两种未经测试的革命性的新概念。第一种就是比特币（bitcoin），一种去中心化的点对点的网上货币，在没有任何资产担保、内在价值或者中心发行者的情况下维持着价值。到目前为止，比特币已经吸引了大量的公众注意力, 就政治方面而言它是一种没有中央银行的货币并且有着剧烈的价格波动。然而，中本聪的伟大试验还有与比特币同等重要的一部分：基于工作量证明的区块链概念使得人们可以就交易顺序达成共识。作为应用的比特币可以被描述为一个先申请（first-to-file）系统：如果某人有50BTC并且同时向A和B发送这50BTC，只有被首先被确认的交易才会生效。没有固有方法可以决定两笔交易哪一笔先到，这个问题阻碍了去中心化数字货币的发展许多年。中本聪的区块链是第一个可靠的去中心化解决办法。现在，开发者们的注意力开始迅速地转向比特币技术的第二部分，区块链怎样应用于货币以外的领域。</p>
@@ -158,11 +158,10 @@
 <li>如果因为发送者账户没有足够的钱或者代码执行耗尽瓦斯导致价值转移失败，恢复原来的状态，但是还需要支付交易费用，交易费用加至矿工账户。</li>
 <li><p>否则，将所有剩余的瓦斯归还给发送者，消耗掉的瓦斯作为交易费用发送给矿工。 例如，假设合约的代码如下：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">if !self.storage[calldataload(0)]:</div><div class="line">self.storage[calldataload(0)] = calldataload(32)</div></pre></td></tr></table></figure>
+<p> 需要注意的是，在现实中合约代码是用底层以太坊虚拟机（EVM）代码写成的。上面的合约是用我们的高级语言Serpent语言写成的，它可以被编译成EVM代码。假设合约存储器开始时是空的，一个值为10以太，瓦斯为2000，瓦斯价格为0.001以太并且64字节数据，第一个三十二字节的快代表号码2和第二个代表词CHARLIE。的交易发送后，状态转换函数的处理过程如下：</p>
 </li>
 </ol>
-<pre><code>需要注意的是，在现实中合约代码是用底层以太坊虚拟机（EVM）代码写成的。上面的合约是用我们的高级语言Serpent语言写成的，它可以被编译成EVM代码。假设合约存储器开始时是空的，一个值为10以太，瓦斯为2000，瓦斯价格为0.001以太并且64字节数据，第一个三十二字节的快代表号码2和第二个代表词CHARLIE。的交易发送后，状态转换函数的处理过程如下：
-
-1. 检查交易是否有效、格式是否正确。
+<pre><code>1. 检查交易是否有效、格式是否正确。
 
 2. 检查交易发送者至少有`2000*0.001=2`个以太币。如果有，从发送者账户中减去2个以太币。
 
@@ -1038,7 +1037,7 @@
     <published>2017-08-11T17:33:42.000Z</published>
     <updated>2017-08-11T18:12:30.000Z</updated>
     
-    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX19Q2dD4SOG6AgnmIYHtq8XPAaJB0HpfiU5iB3WeMUS4TBr6wUQDgDrV8ptwHGpMtgoFQY/wJnBRXpsOjDVnPKhnrnaeWd3fyk3j+54jaI0vgvaOWO94vWDQMzo/HbHktc/GIE2q3jJuLXuTtQnfLMKUtT/2obfrudkbaZ1cI5bpC57WUC8+Pbwkvf9qXp5rUg+Gp9QPyfIKW7JoAy5ECq+3W9tmhucwjLWI+fwsJt4s/5mXZSUiHV4f </div>]]></content>
+    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX19ieMYvOaMYrY1mjaBRl/uh58vskMIDXRCUnNmj3uj5XK/y6NcuwPHH/VjoNSZ0/EL5iIAkkxr9L4AA49tdC6bw3n89gasmY9t6d5VJM1R9r8W6FEDz8q69b1Go9uXZL53eO8X1RMcuE7EWsOj/4gwdTuOB4abh/2jB+BfCsYPkFYHPEDej+RlhgEQSDqq209AOTwmIrnHQNbm9wyU/CDyHpmgECywYTd9UU7Me9T3P7xdzsm4+kgYc </div>]]></content>
     
     <summary type="html">
     
