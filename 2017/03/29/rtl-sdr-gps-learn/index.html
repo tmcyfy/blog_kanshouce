@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Louis,liuqichao@liuqichao.com"><title>RTL-SDR教程：GPS解码和绘图 · 手册</title><meta name="description" content="RTL-SDR可用于实时接收，解码和绘制全球定位系统（GPS）数据。为此，RTL-SDR需要使用GPS天线。
+典型的GPS天线
+在淘宝上可以找到非常便宜的带有SMA连接器的有源GPS天线。
+这些GPS天线包含一个小陶瓷贴片天线，一个低噪声放大器和一个GPS滤波器。为了给天线中的LNA供电，需要具有带"><meta name="keywords" content="Life,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">手册</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><div class="by_farbox"><a href="#">粤ICP备13034981号-2</a><div class="by_farbox"></div><sine>2016</sine><baidu>&lt;script&gt;var _hmt = _hmt || [];(function() {var hm = document.createElement(&quot;script&quot;);hm.src = &quot;https://hm.baidu.com/hm.js?81ba2fab00ebf90138468b27f1178db1&quot;;var s = document.getElementsByTagName(&quot;script&quot;)[0]; s.parentNode.insertBefore(hm, s);})();&lt;/script&gt;</baidu></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li><li><a href="/reader">阅读者</a></li><li><a href="/node">Node</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>RTL-SDR教程：GPS解码和绘图</a></h3></div><div class="post-content"><p>RTL-SDR可用于实时接收，解码和绘制全球定位系统（GPS）数据。为此，RTL-SDR需要使用GPS天线。</p>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-GPS_ant-500x303.jpg" alt=""><br>典型的GPS天线</p>
+<p>在淘宝上可以找到非常便宜的带有SMA连接器的有源GPS天线。</p>
+<p>这些GPS天线包含一个小陶瓷贴片天线，一个低噪声放大器和一个GPS滤波器。为了给天线中的LNA供电，需要具有带偏置三通的RTL-SDR。但如果没有带偏置三通的RTL-SDR，可以使用自制USB 5V外部偏置三通模块，或者如果需要，将其插入标准RTL-SDR。</p>
+<p>另外请注意，由于热量问题，大多数标准的R820T / 2 RTL-SDR在频率高于1.3 GHz的频率下几分钟后都无法接收，所以如果DIY，一定要注意散热设计。如果遇到这个问题，可以考虑使用特殊的<a href="http://www.rtl-sdr.com/beta-testing-a-modified-rtl-sdr-driver-for-l-band-heat-issues/" target="_blank" rel="external">L-Band RTL-SDR驱动</a>程序来缓解这个问题。</p>
+<p>GPS主频率是1.575420 GHz，但这个信号大部分是非常弱的，低于噪声。如果尝试在SDR＃中查看GPS的频谱，可能会发现除了非常弱的驼峰之外，将看不到其他。只有通过进一步的信号处理才能实现这样一个弱信号的恢复。下面将展示一个RTL-SDR和更宽带Airspy R2 SDR所看到的GPS频谱截图。</p>
+<a id="more"></a>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-GPS_rtlsdr_comp.png" alt=""></p>
+<p>GPS RTL-SDR</p>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-GPS2_airspy_comp.png" alt=""></p>
+<p>GPS AIRSPY</p>
+<p>以下教程显示如何接收和解码GPS信号，并在位置的地图上获取坐标，仅使用RTL-SDR加密狗（带偏置三通）和GPS天线。</p>
+<h3><span id="ji-chu-cheng-xu">基础程序</span></h3><p>从<a href="http://www.github.com/taroz/GNSS-SDRLIB" target="_blank" rel="external">这里</a>下载GNSS- SDRLIB。在GitHub上，点击右侧的绿色“克隆或下载”按钮，然后点击“下载ZIP”。将zip文件解压缩到PC上的一个方便的文件夹中。如果要使用修改后的L波段驱动程序，请将修改后的rtlsdr.dll复制到bin文件夹中。</p>
+<h3><span id="an-zhuang-rtk-navi">安装RTK-NAVI</span></h3><p>从<a href="rtklib.com">这里</a>下载最新版本的RTK-NAVI 。如果你喜欢，你也可以在<a href="http://www.github.com/tomojitakasu/RTKLIB_bin/tree/rtklib_2.4.3" target="_blank" rel="external">这里</a>下载他们的测试版本。将zip解压缩到PC任意文件夹中。</p>
+<h3><span id="jian-cha-rtl-sdr">检查RTL-SDR</span></h3><p>确保您的RTL-SDR已插入，并且偏置三通已被激活。</p>
+<h3><span id="yun-xing">运行</span></h3><p>在GNSS-SDRLIB文件夹中，打开gnss-sdrgui.exe。这将存储在bin子文件夹中。</p>
+<h3><span id="can-shu-she-zhi">参数设置</span></h3><ul>
+<li>将输入类型更改为RTL-SDR</li>
+<li>在RTCM MSM旁边放置一个检查，并将端口设置为9999。</li>
+<li>确保“输出间隔”设置为10Hz。</li>
+<li>确保“绘图采集”和“绘图跟踪”都被检查。</li>
+<li>在“MISC”下，可以输入大概的纬度和经度来帮助获得初始锁定。</li>
+<li>在GPS下，GLONASS和Galileo标题确保“ALL”</li>
+</ul>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-gps_step5.png" alt=""></p>
+<p>按start。一堆命令窗口将开始打开和关闭几秒钟。之后，会打开一堆gnuplot图窗口。这些可以忽略。</p>
+<h3><span id="da-kai-rtk-navi">打开RTK-NAVI</span></h3><p>然后转到提取的RTK-NAVI文件夹，并进入bin目录。打开<code>rtlnavi.exe</code>文件。</p>
+<p>点击右上角的“I”按钮</p>
+<p>在（1）Rover旁边放置一个复选标记，并将“Type”更改为TCP Client，将“Format”更改为RTCM3。点击最左侧“Opt”下面的三个点的按钮，将“TCP服务器地址”设置为localhost，将“端口”设置为9999.按OK按钮退出两个窗口。</p>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-gps_step9.png" alt=""></p>
+<h3><span id="rtk-navi-kai-shi">RTK-NAVI开始</span></h3><p>现在按RTK-NAVI开始</p>
+<p>现在应该在顶部图表中看到几个条。这些栏显示卫星的GPS信号强度。在短时间内，应该在左侧面板中看到一个解决方案，这将是您当前的坐标。如果没有解决方案，请尝试重新定位您的GPS天线，以便更好地观察信号，并重新检查偏置三通是否被激活。有时，只需重新启动GNSS-SDRLIB即可解决无法找到问题。</p>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-gps_step10.png" alt=""></p>
+<h3><span id="hui-tu">绘图</span></h3><p>在RTK-NAVI中点击“绘图”按钮。这将打开记录坐标的位置图。要查看您在Google地图上的位置，请点击查看→Google地图视图。如果一切正常，现在应该看到当前位置的准确标记。</p>
+<p><img src="https://pic.kanshouce.com/blog/2017-03-29-gps_final.png" alt=""></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-29</span><i class="fa fa-tag"></i><a href="/categories/SDR/" title="SDR" class="tag">SDR </a><a href="/tags/RTL-SDR/" title="RTL-SDR" class="tag">RTL-SDR </a><a href="/tags/SDR/" title="SDR" class="tag">SDR </a></div></div></div></div><div class="mailcommint">请注意：我们关闭了评论，因为采用邮件或许交流速度更快。 Click ><a href="mailto:liuqichao@liuqichao.com?subject=Commint: RTL-SDR教程：GPS解码和绘图" class="a">Send Mail</a></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://www.kanshouce.com/2017/03/29/rtl-sdr-gps-learn/,手册,RTL-SDR教程：GPS解码和绘图,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/2017/03/29/AIRSPY-HF/" title="AIRSPY HF +：即将推出的低成本高性能HF SDR" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/2017/03/29/hacrk-windows-scan/" title="用于WINDOWS的HACKRF ONE扫频分析仪" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/custom.js"></script></body></html>

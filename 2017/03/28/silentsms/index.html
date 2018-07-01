@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Louis,liuqichao@liuqichao.com"><title>发送Silent SMS手册 · 手册</title><meta name="description" content="PDU是手机Modem交互中使用的协议数据单元模式（Protocol Data Unit）。
+通常可以用与计算机与手机进行调制解调通信发送短信的编码。部分三星手机，存在可以直接进行调制解调器命令发送的漏洞，这样的漏洞导致我们可以通过PDU模式发送 Silent sms（静默短信），除此之外，三星的调"><meta name="keywords" content="Life,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">手册</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><div class="by_farbox"><a href="#">粤ICP备13034981号-2</a><div class="by_farbox"></div><sine>2016</sine><baidu>&lt;script&gt;var _hmt = _hmt || [];(function() {var hm = document.createElement(&quot;script&quot;);hm.src = &quot;https://hm.baidu.com/hm.js?81ba2fab00ebf90138468b27f1178db1&quot;;var s = document.getElementsByTagName(&quot;script&quot;)[0]; s.parentNode.insertBefore(hm, s);})();&lt;/script&gt;</baidu></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li><li><a href="/reader">阅读者</a></li><li><a href="/node">Node</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>发送Silent SMS手册</a></h3></div><div class="post-content"><p>PDU是手机Modem交互中使用的协议数据单元模式（Protocol Data Unit）。</p>
+<p>通常可以用与计算机与手机进行调制解调通信发送短信的编码。部分三星手机，存在可以直接进行调制解调器命令发送的漏洞，这样的漏洞导致我们可以通过PDU模式发送 Silent sms（静默短信），除此之外，三星的调制解调器漏洞也允许读取sim卡的KC（在文末附工具清单）。</p>
+<p>静默短信的原理是发送一个特定长度和特定标记的短信到对方的手机，这并不是一个系统漏洞——而是按照3GPP的协议标准定义：协议要求接受方不显示、并直接丢弃这条短信。</p>
+<p>也就是说，接收方不会收到任何短信，但是实际短信已经到达了接收方手机。这样做的目的通常是用来做手机定位，再2015年欧洲的一个会议上，运营商披露了德国执法机构一年发送了40万条用于追踪犯罪分子。<br><a id="more"></a></p>
+<h2><span id="pdu-mo-shi">PDU模式</span></h2><h3><span id="tong-guo-at-ming-ling-fa-song-pdu-duan-xin">通过AT命令发送PDU短信</span></h3><p><code>AT+CMGF=0 &lt;Enter&gt;</code>    //告诉它你要发的是PDU类的短信</p>
+<p><code>OK</code>                   //这是它返回的它说：“我已经准备好了”</p>
+<p><code>AT+CMGS=25 &lt;Enter&gt;</code>  //告诉它你要发的实际长度</p>
+<p><code>输入内容</code></p>
+<p>完成后按<code>Ctrl+Z</code>发送 </p>
+<p>如果最后返回不是“ERROR”，那就是发送成功咯~</p>
+<p>另外一种方便的方法是写一个shell脚本，需要注意的是：</p>
+<blockquote>
+<p>对模块写入 AT+CMGS=<length>&lt;回车&gt;  的AT命令（其中 <length> 是一个数字，该数字是代表了PDU串中某一部分的长度，这一部分就是指除了SMSC地址之外的那一部分），之后应该得到一个 \r\n&gt; \r\n  响应（特别要注意：<strong>\r是回车，\n是换行</strong>，&gt;是一个大于号，&gt;后面还有一个空格！），才能继续进行下一步；</length></length></p>
+</blockquote>
+<h3><span id="bian-ji-hao-de-ming-ling">编辑好的命令</span></h3><p>如果觉得阅读后面太麻烦，这里提供了一个链接地址</p>
+<p><a href="http://smstools3.kekekasvi.com/topic.php?id=288" target="_blank" rel="external">工具</a></p>
+<p>这个工具可以快速的创建一个PDU短信的代码，避免了复杂的转换工作。</p>
+<p>其中包括了闪信选项（经过实际测试，目前只有联通支持，移动似乎已经在基站关闭了这个功能）</p>
+<h2><span id="pdu-jie-xi-zi-liao">PDU解析资料</span></h2><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>名称</th>
+<th>长度</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCA</td>
+<td>Service Center Address</td>
+<td>1-12</td>
+<td>服务中心号码</td>
+</tr>
+<tr>
+<td>PDU-TYPE</td>
+<td>Protocol Data Unit Type</td>
+<td>1</td>
+<td>协议数据单元类型</td>
+</tr>
+<tr>
+<td>MR</td>
+<td>Message Reference</td>
+<td>1</td>
+<td>所有成功的SMS-SUBMIT参考数目</td>
+</tr>
+<tr>
+<td>OA</td>
+<td>Originator Address</td>
+<td>2-12</td>
+<td>发送方SME的地址</td>
+</tr>
+<tr>
+<td>DA</td>
+<td>Destination Address</td>
+<td>2-12</td>
+<td>接收方SME的地址</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>Protocol Identifier</td>
+<td>1</td>
+<td>参数标示SMSC以何种方式处理SM，比如FAX，Voice</td>
+</tr>
+<tr>
+<td>DCS</td>
+<td>Data Coding Scheme</td>
+<td>1</td>
+<td>用户数据采用的编码方案</td>
+</tr>
+<tr>
+<td>SCTS</td>
+<td>Service Center Time Stamp</td>
+<td>7</td>
+<td>标示SMSC接收到消息时的时间戳</td>
+</tr>
+<tr>
+<td>VP</td>
+<td>Validity Period</td>
+<td>0，1，7</td>
+<td>标示消息在SMSC中不再有效的时长</td>
+</tr>
+<tr>
+<td>UDL</td>
+<td>User Data Length</td>
+<td>1</td>
+<td>用户数据段长度</td>
+</tr>
+<tr>
+<td>UD</td>
+<td>User Data</td>
+<td>0-140</td>
+<td>用户数据</td>
+</tr>
+</tbody>
+</table>
+<h2><span id="fa-song-fang-pdu-ge-shi">发送方PDU格式</span></h2><h3><span id="shi-li-xiang-138xxxx4908-fa-song-yi-tiao-sms-xiao-xi-nei-rong-wei-test">示例：向138xxxx4908发送一条sms，消息内容为：Test</span></h3><table>
+<thead>
+<tr>
+<th>SCA</th>
+<th>PDUType</th>
+<th>MR</th>
+<th>DA</th>
+<th>PID</th>
+<th>DCS</th>
+<th>VP</th>
+<th>UDL</th>
+<th>UD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务中心号码</td>
+<td>协议数据单元类型</td>
+<td>所有成功SMS-submit参考数</td>
+<td>接收方SME地址何种方式处理SM比如FAX</td>
+<td>用户采用编码方案</td>
+<td>消息在SMSC中不再有效时长</td>
+<td>用户数据段长度</td>
+<td>用户数据</td>
+<td></td>
+</tr>
+<tr>
+<td>1-12</td>
+<td>1</td>
+<td>1</td>
+<td>2-12</td>
+<td>1</td>
+<td>1</td>
+<td>0，1，7</td>
+<td>1</td>
+<td>0-140</td>
+</tr>
+<tr>
+<td>00</td>
+<td>31</td>
+<td>00</td>
+<td>0D916831xxxx4209F8</td>
+<td>00</td>
+<td>00</td>
+<td>A7</td>
+<td>04</td>
+<td>D4F29C0E</td>
+</tr>
+</tbody>
+</table>
+<h3><span id="xiang-138xxxx4908-fa-song-yi-tiao-sms-xiao-xi-nei-rong-wei-ce-shi">向138xxxx4908发送一条sms，消息内容为：测试</span></h3><table>
+<thead>
+<tr>
+<th>SCA</th>
+<th>PDUType</th>
+<th>MR</th>
+<th>DA</th>
+<th>PID</th>
+<th>DCS</th>
+<th>VP</th>
+<th>UDL</th>
+<th>UD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务中心号码</td>
+<td>协议数据单元类型</td>
+<td>所有成功SMS-submit参考数</td>
+<td>接收方SME地址</td>
+<td>何种方式处理SM比如FAX</td>
+<td>用户采用编码方案</td>
+<td>消息在SMSC中不再有效时长</td>
+<td>用户数据段长度</td>
+<td>用户数据</td>
+</tr>
+<tr>
+<td>1-12</td>
+<td>1</td>
+<td>1</td>
+<td>2-12</td>
+<td>1</td>
+<td>1</td>
+<td>0，1，7</td>
+<td>1</td>
+<td>0-140</td>
+</tr>
+<tr>
+<td>00</td>
+<td>31</td>
+<td>00</td>
+<td>0B813xxxx4209F8</td>
+<td>00</td>
+<td>18</td>
+<td>A7</td>
+<td>04</td>
+<td>6D4B8BD5</td>
+</tr>
+</tbody>
+</table>
+<h2><span id="xiang-xi-zi-liao">详细资料</span></h2><p>如果有深入研究的兴趣，这是一份更为详细的资料</p>
+<p><strong>PDU简介及其格式</strong><br>PDU是大多数手机短信通讯的核心，我们都可以通过AT指令控制终端实现短信的发送、接收、删除等管理。下面主要介绍PDU的构成及编码解码。   </p>
+<h3><span id="pdu-de-gou-cheng">PDU的构成</span></h3><p>PDU是由一串由“0-9”及“A-F”组成。表面上看起来就是一组16进制的数所组成的。</p>
+<p>下面举一个发送和接收的例子。</p>
+<p>手机发送的一个PDU串：</p>
+<p><code>0891683108200805F011190D916831xxxx2848F40008FF108FD9662F4E0067616D4B8BD577ED4FE</code></p>
+<p>对比3GPP协议得到：（二进制代码从左到右依次为高位-&gt;低位）</p>
+<p>短信中心地址字段 </p>
+<p><strong>08</strong>  Address-Lengt(地址长度)：短信息中心地址长度。指（91）+（683108701305F0）的长度。8个字节，包括其后的91    </p>
+<p><strong>91</strong>  Type-of-Address(地址类型)：10010001 </p>
+<ul>
+<li>Bit7：1。始终为1</li>
+<li><p>Bits 6,5,4：Type-of-Number（号码类型）：</p>
+<pre><code>- 001—代表Internation Number(国际号码)。也即是号码前加“+”。
+</code></pre><p> 注意：对某些比较特殊的号码，例如手机与小灵通的互通时，这里不能设置为001;而要设置成000—未知，代表号码前没有“+”，否则无法接收。</p>
+<pre><code>- 010—国内号码;011—111也分别代表不同的号码类型,一般不用.
+</code></pre></li>
+<li><p>Bits 3,2,1,0：Numbering-plan-identification(号码鉴别)：<br> 0000—未知，0001—ISDN/电话号码(E.164/E.163)，1111—留作扩展；一般默认为0001，表示电话号码类型的。</p>
+</li>
+</ul>
+<p><strong>683108200805F0</strong>  (Service center number)短信中心号码：一个字节内反转，8613800280500，如果长度为奇数则需要加“F”补齐</p>
+<p>FirstOctet字段 (文件头字节)【超长短信此处为44，相关文档未找全】</p>
+<p><strong>11</strong>   包含TP-MTI(2bit)，TP-RD(1bit)，TP-VPF(2bit)，TP-RP（1bit），TP-UDHI(1bit)，TP-SRR(1bit)<br>二进制表示形式：0 0 0 10 0 01 </p>
+<ul>
+<li>TP-RP：0<br>TP-Reply-Path（回复路径）</li>
+<li>Bit7：0—不设置; 1—设置<br>  0  指示没有设置回复路径。<br>TP-UDHI：0<br>TP-User-Data-Header-Indicator（用户数据头标示）</li>
+<li>Bit6：0—不含任何头信息; 1—含头信息 【超长短信此处为1，有头信息】<br>0  指示这是一个SMS消息，没有用户数据头。EMS消息需要设置。<br>TP-SRR：0<br>TP-Status-Report-Request</li>
+<li><p>Bit5：0—需要报告; 1—不需要报告<br>TP-VPF：10<br>TP-Validity-Period-Format（有效期格式）</p>
+<p>-Bit4,3：：00—不提供（Not present）; 10—整型（标准）；01—预留; 11—提供8位字节的一半（Semi-Octet Represented）<br>10 指示使用相对格式。<br>TP-RD：0<br>TP-Reject-Duplicates（是否拒绝相同重复消息）</p>
+</li>
+<li><p>Bit2：0—接受复制; 1—拒绝复制【超长短信此处为1，拒绝复制】<br>0 指示短消息中心接受未转发的具有相同TP-MR的消息。<br>TP-MTI：01<br>TP-Message-Type-Indicator（消息类型指示符）</p>
+</li>
+<li><p>Bit1,0：00—读出（Deliver）; 01—提交（Submit）<br>01 指示为SMS-SUBMIT类型<br>0  指示不使用状态报告。</p>
+</li>
+</ul>
+<p>消息参考值TP-MR</p>
+<p><strong>19</strong>  TP-Message-Reference<br>使用”00” 值代表让电话自己设置消息参考值.</p>
+<p>对方号码字段<br>0D91683188902848F4<br>   其结构与短信中心号码字段部分类似，不再赘述。</p>
+<p>协议标识TP-PID<br><strong>00 </strong> TP-Protocol-Identifier（上层协议指示），一般设置为00，表示普通GSM，点对点</p>
+<ul>
+<li>BIT No.  7 6 5 4 3 2 1 0  </li>
+<li>Bit7与Bit6： 00—使用Bit0至Bit5定义的分配；01—使用Bit0至- - Bit5定义的分配,参见GSM03.40协议标识完全定义；10—预留；11—使用Bit0至Bit5定义的分配,为服务中心（SC）特殊用途分配。<br>一般将这两位置为00。 </li>
+<li>Bit5：0—不使用远程网络，只是短消息设备之间的协议；1—使用远程网络。<br>Bit0,1,2,3,4：00000—隐含；00001—电传；00010—group 3 telefax；00100—语音；00101—欧洲无线信息系统（ERMES）；00110—国内系统；10001—任何基于X.400的公用信息处理系统；10010—Email。 </li>
+</ul>
+<p>编码方法TP-DCS<br><strong>08</strong>  TP-Data-Coding-Scheme（数据编码设置），指示TP-UD的编码方式。08代表Unicode方式。00为7Bit编码<br>BIT No. 7 6 5 4 3 2 1 0<br>Bit7与Bit6 :一般设置为00；<br>Bit5：0—文本未压缩，1—文本用GSM标准压缩算法压缩；<br>Bit4：0—表示Bit1、Bit0为保留位，不含信息类型信息，1—表示Bit1、Bit0含有信息类型信息；<br>Bit3与Bit2：00—默认的字母表，01—8bit，10—USC2（16bit），11—预留；<br>Bit1与Bit0：00—Class 0 立即显示就是闪信(Immediate display) ，01—Class 1，10—Class 2（SIM卡特定信息），11—Class 3。 </p>
+<p>有效期TP-VP 【如果在FirstOctet字段中定义的有效期有不提供（00）则无此域】【超长短信定义为不提供，相关文档未找全】<br><strong>FF</strong>  TP-Validity-Period（有效期）。FF表示最大。<br>VP value(&amp;h)  相应的有效期<br>00 to 8F(0 to 143)          (VP+1)<em>5 分钟<br>90 to A7(144 to 167)          12小时+(VP-143)</em>30分钟<br>A8 to C4(168 to 196)          (VP-166)<em>1天<br>C5 to FF(197 to 255)           (VP-192)</em>1 周</p>
+<p>用户数据长度TP-UDL<br><strong>10 </strong> TP-User-Data-Length（用户数据长度）<br>     0x10长度。注意不同编码下用户长度定义不同。</p>
+<p>用户数据TP-UD<br>【如果在FirstOctet字段中定义了对信息，如超长短信，则在些处填入头信息】头信息属于TP-UD<br>05 协议头长度 ，超长短信为5位<br>00 表示这是条超长短信，相关文档未找全<br>03 分拆数据真金元素的长度？<br>39 唯一标志，用于两条短信合并，相关文档未找全，不知如何产生<br>02 拆分成2条<br>01 这是第一条<br>8FD9662F4E0067616D4B8BD577ED4FE<br>TP-User-Data<br>   中文“这是一条测试短信”的Unicode编码</p>
+<p>2、  手机接收的PDU串<br>0891683108200805F0040D91683188902848F4000850208151754500108FD9662F4E0067616D4B8BD577ED4FE1<br>短信中心地址字段–SMS的PDU编码 [同发送定义]<br>   0891683108200805F0：+861380280500<br>FirstOctet<br>   04<br>     其二进制代码：00000100<br>     TP-MTI：00<br>     TP-MMS(TP-More-Message-to-Send)：1 短信中心没有更多的消息发送<br>     TP-SRI：0<br>     TP-UDHI：0<br>     TP-RP：0<br>发送方号码–SMS的PDU编码[同发送定义]<br>   0D91683188902848F4：+8613880982844<br>协议标识–SMS的PDU编码[同发送定义]<br>   00  TP-PID  点对点<br>编码方式–SMS的PDU编码（再次记录，以前的找不到了）[同发送定义]<br>   08  TP-DCS  Unicode编码<br>短信中心时间戳–注意，发送此处为1位长的有效期<br>   50208151754500 TP-SCTS  字节反转05/02/18 15：57：45  最后的00代表时区，这里为0<br>用户数据长度–SMS的PDU编码 [同发送定义]<br>   10  TP-DHL （按字节计）<br>用户数据(TP-User-Data)–SMS的PDU编码 [同发送定义]<br>   8FD9662F4E0067616D4B8BD577ED4FE1    TP-UD<br> 中文“这是一条测试短信”的Unicode编码</p>
+<h2><span id="duan-xin-hui-zhi-ying-jian-jie-kou-she-zhi">短信回执硬件接口设置</span></h2><h3><span id="ying-jian-jie-kou">硬件接口</span></h3><p>GSM MODEM支持GSM07.05、GSM07.07所定义的的AT指令集。通过串口与计算机相连</p>
+<h3><span id="duan-xiao-xi-hui-zhi-she-zhi">短消息回执设置</span></h3><p>可以在终端交互界面输入 <code>AT+CNMI?</code> 来确认目前的状态，可能返回的是：<code>&gt; AT CNMI=2,2,0,1,1</code></p>
+<p>CNMI的格式为：<br><code>AT CNMI=&lt;mode&gt;,&lt;mt&gt;,&lt;bm&gt;,&lt;ds&gt;,&lt;brf&gt;</code></p>
+<p>参数：<br><strong>mode</strong></p>
+<p>1：缓存到终端<br>0：直接发送到TE</p>
+<p><strong>mt</strong></p>
+<p>0：接收到新的SMS不返回事件<br>1：如果接收到的SMS存储在na ，则返回 <code>CMTI:&lt;mem&gt;,&lt;index&gt;</code><br>2：除了Class2 SMS，新的SMS直接发送到终端，返回<code>CMT:&lt;length&gt;&lt;CR&gt;&lt;LF&gt;&lt;PDU&gt;</code><br>3：Class3 SMS使用mt=2的方法返回，其他类型的使用mt=1的方法返回。    </p>
+<p><strong>bm</strong><br>0：小区广播不通知<br>2：新的小区广播通知，返回<code>CBM:&lt;length&gt;&lt;CR&gt;&lt;LF &gt;&lt;pdu&gt;</code><br>3：Class3格式的小区广播通知，使用bm=2格式    </p>
+<p><strong>ds</strong><br>0：状态报告不<br>1：新的状态报告通知，返回：<code>CDS:&lt;length&gt;&lt;CR&gt;&lt;LF&gt;&lt;pdu&gt;</code><br>2：如果新的状态报告存储到ME，则返回：<code>CDSI:&lt;mem&gt;,&lt;index&gt;</code>    </p>
+<p><strong>brf</strong><br>1：始终为1    </p>
+<h2><span id="gong-ju-qing-dan">工具清单</span></h2><ul>
+<li><a href="https://github.com/ud2/advisories/blob/master/android/samsung/nocve-2016-0004/usbswitcher.c" target="_blank" rel="external">usbswitcher</a>  PS，这个Github的作者放了很多关于三星的安全工具，这个工具是调用三星USB接口进入modem模式。 </li>
+<li><p><a href="https://sourceforge.net/projects/libusb/files/libusb-0.1%20%28LEGACY%29/0.1.12/" target="_blank" rel="external">libusb version 0.12</a> 必须安装0.12版本，新的版本不能支持三星手机的读取</p>
+</li>
+<li><p>gcc</p>
+</li>
+<li>lsusb</li>
+<li>busybox microcom (alternatively, use minicom)</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-03-28</span><i class="fa fa-tag"></i><a href="/categories/GSM/" title="GSM" class="tag">GSM </a><a href="/tags/SDR/" title="SDR" class="tag">SDR </a><a href="/tags/SMS/" title="SMS" class="tag">SMS </a><a href="/tags/silentsms/" title="silentsms" class="tag">silentsms </a></div></div></div></div><div class="mailcommint">请注意：我们关闭了评论，因为采用邮件或许交流速度更快。 Click ><a href="mailto:liuqichao@liuqichao.com?subject=Commint: 发送Silent SMS手册" class="a">Send Mail</a></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://www.kanshouce.com/2017/03/28/silentsms/,手册,发送Silent SMS手册,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/2017/03/29/WELLE-IO/" title="WELLE.IO：适用于WINDOWS / LINUX的新型RTL-SDR＆AIRSPY DAB / DAB +解码器" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/2017/01/18/aboutmeeting/" title="会议不完全手册 - 罗伯特议事原则" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/custom.js"></script></body></html>
