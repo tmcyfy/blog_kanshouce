@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Louis,liuqichao@liuqichao.com"><title>使用RT-SDL进行业余脉冲星观测 · 手册</title><meta name="description" content="脉冲星是什么？脉冲星是一种有10^7—10^14T强磁场的快速自转中子星，脉冲星发射的射电脉冲的周期性非常有规律。一开始，人们对此很困惑，甚至曾想到这可能是外星人在向我们发电报联系。据说，第一颗脉冲星就曾被叫做“小绿人一号”。
+更详细的科普可以戳这里百度百科
+
+人类对脉冲星的观测一些业余无线电天文学"><meta name="keywords" content="Life,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">手册</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><div class="by_farbox"><a href="#">粤ICP备13034981号-2</a><div class="by_farbox"></div><sine>2016</sine></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li><li><a href="/reader">阅读者</a></li><li><a href="/node">Node</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>使用RT-SDL进行业余脉冲星观测</a></h3></div><div class="post-content"><p><img src="https://pic.kanshouce.com/blog/2017-04-03-pulsar_antenna_OE5JFL.jpg" alt=""></p>
+<h2><span id="mai-chong-xing-shi-shi-me">脉冲星是什么？</span></h2><p>脉冲星是一种有<code>10^7—10^14T</code>强磁场的快速自转中子星，脉冲星发射的射电脉冲的周期性非常有规律。一开始，人们对此很困惑，甚至曾想到这可能是外星人在向我们发电报联系。据说，第一颗脉冲星就曾被叫做“小绿人一号”。</p>
+<p>更详细的科普可以戳这里<a href="http://baike.baidu.com/link?url=lADO_dg1j6uU7Ld_hu1SxOs7WvdEtIWVd2vF5a5hSCcXktq2S6l2eMPtEx232uDbCAxWhX9EQM456Lb5sWxqm9UrhJJUaw-bQimrtxw31uSAP2Ky0R1VNngS42GwvrY_" target="_blank" rel="external">百度百科</a></p>
+<a id="more"></a>
+<h2><span id="ren-lei-dui-mai-chong-xing-de-guan-ce">人类对脉冲星的观测</span></h2><p>一些业余无线电天文学家会使用RTL-SDR来检测脉冲星。</p>
+<p>当脉冲星的该光束指向地球，则可以使用大型碟形天线和收音机观察，使用RTL-SDR可以接收到。</p>
+<p>在国外的一些讨论帖中，这些人展示了他们如何能够检测和测量维拉脉冲星的旋转周期，这是最强大和最容易接收脉冲星之一的脉冲星。他们还注意到如何使用几个RTL-SDR加密狗可以减少所需的卫星天线尺寸。</p>
+<h2><span id="15-ge-mai-chong-xing-shu-ju">15个脉冲星数据</span></h2><p>最近有个叫Hannes Fasching（OE5JFL）的人，他展示了使用RTL-SDR已经检测到了15个脉冲星。他的检测系统配置：</p>
+<ul>
+<li>天线： 7.3m自制偏移盘，OE5JFL跟踪系统进给<br>： 70cm（424 MHz）双偶极固体反射器，23cm（1294 MHz）RA3AQ喇叭</li>
+<li>前置放大器： 23cm腔MGF4919,70厘米2SK571（30岁！）</li>
+<li>线路放大器： PGA103 + </li>
+<li>交叉滤波器：采用VK3UM软件，70cm 4极，23cm 3极</li>
+<li>接收器： RTL-SDR（误差&lt;1ppm），2 MHz带宽</li>
+<li>软件： IW5BHY，Presto，Tempo，Murmur</li>
+</ul>
+<p>截止到2017年3月29日他监测到的脉冲星数据</p>
+<table>
+<thead>
+<tr>
+<th>脉冲星</th>
+<th>70cm (424 MHz)</th>
+<th>23cm (1294 MHz)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B0329 + 54</td>
+<td>110</td>
+<td>85</td>
+</tr>
+<tr>
+<td>B0531 + 21（蟹）</td>
+<td>10</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B0823 + 26</td>
+<td>18</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B0834 + 06</td>
+<td>10</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B0950 + 08</td>
+<td>32</td>
+<td>14</td>
+</tr>
+<tr>
+<td>B1133 + 16</td>
+<td>24</td>
+<td>11</td>
+</tr>
+<tr>
+<td>B1237 + 25</td>
+<td>6</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B1508 +55</td>
+<td>9</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B1642-03</td>
+<td>26</td>
+<td>9</td>
+</tr>
+<tr>
+<td>B1749-28</td>
+<td>21</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B1818-04</td>
+<td>8</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B1911-04</td>
+<td>12</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B1919 + 21</td>
+<td>14</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B1929 + 10</td>
+<td>33</td>
+<td>9</td>
+</tr>
+<tr>
+<td>B1933 + 16</td>
+<td>20</td>
+<td>31</td>
+</tr>
+<tr>
+<td>B1946 + 35</td>
+<td>6</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B2016 + 28</td>
+<td>14</td>
+<td>12</td>
+</tr>
+<tr>
+<td>B2020 + 28</td>
+<td>9</td>
+<td>6</td>
+</tr>
+<tr>
+<td>B2021 + 51</td>
+<td>16</td>
+<td>17</td>
+</tr>
+<tr>
+<td>B2111 + 46</td>
+<td>6</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B2217 + 47</td>
+<td>15</td>
+<td>— —</td>
+</tr>
+<tr>
+<td>B2310 + 42</td>
+<td>11</td>
+<td>— —</td>
+</tr>
+</tbody>
+</table>
+<p><strong>螃蟹脉冲星是一个挑战，30转/秒，高分散。首次尝试收到！</strong></p>
+<p><strong>注意事项</strong>： B2016 + 28和B2020 + 28相距只有1度左右。通过分析相同的记录文件获得两个脉冲星的424 MHz谱。</p>
+<h2><span id="shu-ju-xia-zai">数据下载</span></h2><p>所有检测到的脉冲星的屏幕截图总结，包含IW5BHY软件和Presto软件的输出，可以从<a href="http://qsl.net/oe5jfl/pulsar/pulsar_screenshots_bhy_presto.zip" target="_blank" rel="external">这里下载</a></p>
+<h3><span id="b0329-54">B0329 + 54</span></h3><p><img src="https://pic.kanshouce.com/blog/2017-04-03-jfl_0329_70_12feb17_presto.png" alt=""></p>
+<h3><span id="b1642-03">B1642-03</span></h3><p><img src="https://pic.kanshouce.com/blog/2017-04-03-jfl_1642_70_23_pr_s.png" alt=""></p>
+<h3><span id="b0950-08">B0950 + 08</span></h3><p><img src="https://pic.kanshouce.com/blog/2017-04-03-jfl_0950_70_23_p_s.png" alt=""></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-04-03</span><i class="fa fa-tag"></i><a href="/categories/SDR/" title="SDR" class="tag">SDR </a><a href="/tags/RTL-SDR/" title="RTL-SDR" class="tag">RTL-SDR </a><a href="/tags/Amateur-Pulsar/" title="Amateur Pulsar" class="tag">Amateur Pulsar </a></div></div></div></div><div class="mailcommint">请注意：我们关闭了评论，因为采用邮件或许交流速度更快。 Click ><a href="mailto:liuqichao@liuqichao.com?subject=Commint: 使用RT-SDL进行业余脉冲星观测" class="a">Send Mail</a></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://www.kanshouce.com/2017/04/03/AmateurPulsarObservations/,手册,使用RT-SDL进行业余脉冲星观测,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/2017/04/10/sdrsharp-spyserver/" title="SDRSHARP SPYSERVER已支持RTL-SDR" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/2017/04/03/airspyhf-newversion/" title="AIRSPY HF +官方配置发布" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/custom.js"></script></body></html>

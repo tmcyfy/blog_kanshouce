@@ -1,0 +1,113 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Louis,liuqichao@liuqichao.com"><title>用正确的姿势在CentOS7上打开GOOGLE BBR · 手册</title><meta name="description" content="Google BBR自开源后得到了一致好评，在服务器打开后可感到明显提升。
+而最有趣的是，GOOGLE在自己的GITHUB上放了这么一句
+
+This is not an official Google product.
+
+但是又有何妨呢，好用就可以。
+
+按照步骤执行：
+安装yum系统更新yum up"><meta name="keywords" content="Life,HTML,CSS,android,Linux"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">手册</a></h3><div class="description"><p>Nothing lasts forever.</p></div></div></div><ul class="social-links"><li><a href="/atom.xml"><i class="fa fa-rss"></i></a></li></ul><div class="footer"><div class="by_farbox"><a href="#">粤ICP备13034981号-2</a><div class="by_farbox"></div><sine>2016</sine></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li><li><a href="/reader">阅读者</a></li><li><a href="/node">Node</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.png"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>用正确的姿势在CentOS7上打开GOOGLE BBR</a></h3></div><div class="post-content"><p>Google BBR自开源后得到了一致好评，在服务器打开后可感到明显提升。</p>
+<p>而最有趣的是，GOOGLE在自己的GITHUB上放了这么一句<br><a id="more"></a></p>
+<blockquote>
+<p>This is not an official Google product.</p>
+</blockquote>
+<p>但是又有何妨呢，好用就可以。</p>
+<!--more-->
+<p>按照步骤执行：</p>
+<h2><span id="an-zhuang">安装</span></h2><h4><span id="yum-xi-tong-geng-xin-yum-update-geng-xin-dao-7-3"><code>yum</code>系统更新<code>yum update</code>（更新到7.3）</span></h4><p>查看系统版本</p>
+<pre>
+cat /etc/redhat-release
+</pre>
+
+<p>输出如下，则表示已升级到7.3</p>
+<pre>
+CentOS Linux release 7.3.1611 (Core)
+</pre>
+
+<h4><span id="an-zhuang-elrepo-bing-sheng-ji-nei-he">安装elrepo并升级内核</span></h4><pre>
+$ rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+$ rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+$yum --enablerepo=elrepo-kernel install kernel-ml -y
+</pre>
+
+<p>正常情况下将输出如下:</p>
+<pre>
+Transaction Summary
+Install 1 Package
+Total download size: 39 M
+Installed size: 169 M
+Downloading packages:
+kernel-ml-4.9.0-1.el7.elrepo.x86_64.rpm | 39 MB 00:00
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+Warning: RPMDB altered outside of yum.
+Installing : kernel-ml-4.9.0-1.el7.elrepo.x86_64 1/1
+Verifying : kernel-ml-4.9.0-1.el7.elrepo.x86_64 1/1
+
+Installed:
+kernel-ml.x86_64 0:4.9.0-1.el7.elrepo
+
+Complete!
+</pre>
+
+
+<h4><span id="geng-xin-grub-wen-jian-bing-chong-qi-reboot-hou-ssh-hui-duan-kai-shao-deng-yi-hui-er-chong-xin-lian-jie">更新grub文件并重启（reboot后，ssh会断开，稍等一会儿重新连接）</span></h4><pre>
+$ egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
+$ grub2-set-default 0
+$ reboot
+</pre>
+
+<p>开机后查看内核是否已更换为4.9</p>
+<pre>
+$ uname -r
+</pre>
+
+<p>输出如下内容则表示内核4.9已经启动了</p>
+<pre>
+4.9.0-1.el7.elrepo.x86_64
+</pre>
+
+<h4><span id="kai-qi-bbr">开启bbr</span></h4><pre>
+$ vim /etc/sysctl.conf
+</pre>
+
+<p>添加如下内容</p>
+<pre>
+net.core.default_qdisc = fq
+net.ipv4.tcp_congestion_control = bbr
+</pre>
+
+<p>加载系统参数（正常情况下会输出我们之前加入的内容）</p>
+<pre>
+$ sysctl -p
+</pre>
+
+
+<h3><span id="ce-shi">测试</span></h3><h4><span id="que-ding-bbr-yi-jing-kai-qi">确定bbr已经开启</span></h4><p>a.若</p>
+<pre>
+$ sysctl net.ipv4.tcp_available_congestion_control
+</pre>
+
+<p>返回</p>
+<pre>
+net.ipv4.tcp_available_congestion_control = bbr cubic reno
+</pre>
+
+<p>则成功</p>
+<p>b.若</p>
+<pre>
+$ lsmod | grep bbr
+</pre>
+
+<p>返回形如</p>
+<pre>
+tcp_bbr 16384 1
+</pre>
+
+<p>则成功</p>
+<blockquote>
+<p>最后值得注意的是，如果你的主机是aliyun，开启了BBR可能造成阿里云控制台中的监控实效。</p>
+</blockquote>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-01-11</span><i class="fa fa-tag"></i><a href="/categories/Server/" title="Server" class="tag">Server </a><a href="/tags/Server/" title="Server" class="tag">Server </a><a href="/tags/Centos/" title="Centos" class="tag">Centos </a><a href="/tags/Google/" title="Google" class="tag">Google </a><a href="/tags/BBR/" title="BBR" class="tag">BBR </a></div></div></div></div><div class="mailcommint">请注意：我们关闭了评论，因为采用邮件或许交流速度更快。 Click ><a href="mailto:liuqichao@liuqichao.com?subject=Commint: 用正确的姿势在CentOS7上打开GOOGLE BBR" class="a">Send Mail</a></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,https://www.kanshouce.com/2017/01/11/googleenablebbr/,手册,用正确的姿势在CentOS7上打开GOOGLE BBR,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/2017/01/12/the-value-of-life/" title="互联网价值手册导读 - 海盗、比剑" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/2017/01/11/mac-MPV/" title="macOS播放器不完全手册" class="btn">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="/js/custom.js"></script></body></html>
