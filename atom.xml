@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.kanshouce.com/"/>
-  <updated>2018-04-03T15:28:39.000Z</updated>
+  <updated>2018-07-12T11:39:55.000Z</updated>
   <id>https://www.kanshouce.com/</id>
   
   <author>
@@ -14,6 +14,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Dreamcatcher 3 LoRa建立无线电聊天</title>
+    <link href="https://www.kanshouce.com/2018/07/12/lora/"/>
+    <id>https://www.kanshouce.com/2018/07/12/lora/</id>
+    <published>2018-07-12T11:23:10.000Z</published>
+    <updated>2018-07-12T11:39:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Outernet提供了一个在Dreamcatcher 3上运行的<a href="https://github.com/Outernet-Project/Dreamcatcher-Packet-Tester" target="_blank" rel="external">LoRa双向开源文本聊天应用程序</a>。</p>
+<p>聊天程序依赖硬件板，所以需要两个Dreamcatcher 3硬件板。</p>
+<a id="more"></a>
+<p>通过该这个程序，可以在电路板之间实时聊天。业余无线电爱好者可能对这些电路板感兴趣（或者某些潮流Geek们），包括那些在短期内可能希望获得加密聊天的用户（虽然这玩意儿没加密）。</p>
+<p>Outernet在推广的过程中没有特别宣传他们的广播传输功能，因为这块硬件板没有经过FCC认可，所以它不能合法地用作传输和收听LoRa IoT传感器的ISM频段LoRa设备。但是如果你能确保输出干净合法并且在火腿带上，你可以用火腿传送它。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1ft7b0wzsuhj30rs0v9q8c.jpg" alt=""></p>
+<h2><span id="dreamcatcher-v3-0">Dreamcatcher v3.0</span></h2><p>我们找到了两个Dreamcatcher 3板来测试聊天应用程序。</p>
+<p>与之前的版本一样，Dreamcatcher是一个内置无线电的完整计算板。除了这个时间而不是RTL-SDR，无线电是硬件LoRa模块。另一个区别是现在有一个内置的液晶屏。</p>
+<p>在电路板上有两个SMA端口，一个标记为“Direct”，另一个标记为“LNB”。直接端口是我们需要用于聊天应用程序的端口，因为这是可以传输的端口。还有两个SD卡插槽，一个用于操作系统，一个用于存储，麦克风和耳机插孔，带有WiFi适配器的USB-A插槽，以及两个USB微插槽，一个用于USB OTG，另一个用于电源。</p>
+<p>该套件还配有一个LNB，旨在与Outernet卫星服务一起使用。LNB仅接收，因此不能与聊天应用程序一起使用，因此如果尝试使用LoRa发射器，则需要使用自己的天线。</p>
+<h2><span id="liao-tian-she-zhi-he-shi-yong">聊天设置和使用</span></h2><p>首先，我们将最新版本的<a href="https://archive.outernet.is/Dreamcatcher3%20Armbian/" target="_blank" rel="external">Dreamcatcher Armbian OS刻录</a>到两个SD卡上，并在每个板中插入一个。由于Dreamcatcher 3具有内置LCD屏幕，您可以通过屏幕登录和访问终端。但由于只有一个USB端口可用，您需要一个USB集线器才能插入鼠标和键盘，以及随附的USB WiFi适配器。或者，如果将USB OTG端口连接到PC，则可以通过USB串行连接与其连接。</p>
+<p>聊天软件可在<a href="https://github.com/Outernet-Project/Dreamcatcher-Packet-Tester。" target="_blank" rel="external">GitHub上获得</a>，要安装它，只需在Dreamcatcher的终端上运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt update</div><div class="line">sudo apt install libsoc-dev libsoc2</div><div class="line">git <span class="built_in">clone</span> https://github.com/Outernet-Project/Dreamcatcher-Packet-Tester</div><div class="line">make</div></pre></td></tr></table></figure>
+<p>编译完成后，可以用命令启动聊天程序：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ./chat</div></pre></td></tr></table></figure>
+<h2><span id="shi-yong-lora-she-zhi">使用LoRa设置</span></h2><p>默认情况下，实际RF输出频率硬编码为2.4 GHz。如果要更改它，可以使用基于终端的文本编辑器（如nano）编辑main.cpp文件，并查找<code>#define RF_FREQUENCY</code>条目。然后，您需要通过再次运行<code>&#39;make&#39;</code>来重新编译。但请注意，在本文发布时，根据Outernet，该软件仅在2.4 GHz左右正常工作。显然这只是一个软件限制，一旦修复，你应该能够在85 MHz到5400 MHz之间的任何频率上进行传输。</p>
+<p>此外，默认情况下，<code>LoRa&#39;Spreading Factor&#39;</code>设置为最大值12.这意味着在发送消息和在另一个消息上接收消息之间大约有1秒的延迟。</p>
+<p>也可以通过编辑<code>“modulationParams.Params.LoRa.SpreadingFactor”</code>变量在代码中调整扩展项。这决定了数据包在时间上的分散程度。较大的扩展项导致更稳健的无差错通信，而较小的因素导致较低的延迟。下面是代码的一些有效扩展项条目。</p>
+<p>请注意，如果减少扩展项，还需要减少<code>RX_TIMEOUT_VALUE</code>和<code>TX_TIMEOUT_VALUE #defines</code>（需要在代码中搜索这些行。提示：在Nano CTRL + W中搜索。）。对于扩展项<code>7</code>，100ms的超时效果很好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">LORA_SF5 </div><div class="line">LORA_SF6 </div><div class="line">LORA_SF7 </div><div class="line">LORA_SF8 </div><div class="line">LORA_SF9 </div><div class="line">LORA_SF10 </div><div class="line">LORA_SF11 </div><div class="line">LORA_SF12</div></pre></td></tr></table></figure>
+<p>也可以使用<code>“modulationParams.Params.LoRa.Bandwidth”</code>变量上的以下代码将带宽从200 kHz调整到1600 kHz。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">LORA_BW_0200 </div><div class="line">LORA_BW_0400 </div><div class="line">LORA_BW_0800 </div><div class="line">LORA_BW_1600</div></pre></td></tr></table></figure>
+<p>LoRa’编码率’也可以通过<code>“modulationParams.Params.LoRa.CodingRate”</code>变量进行更改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">LORA_CR_4_5 </div><div class="line">LORA_CR_4_6 </div><div class="line">LORA_CR_4_7 </div><div class="line">LORA_CR_4_8 </div><div class="line">LORA_CR_LI_4_5 </div><div class="line">LORA_CR_LI_4_6 </div><div class="line">LORA_CR_LI_4_7</div></pre></td></tr></table></figure>
+<p>还可以通过调整<code>#define TX_OUTPUT_POWER</code>指定的值来调整TX输出功率。默认情况下，它设置为最大输出功率13 dBm。可用的最低值为-18 dBm。 </p>
+<p>请记住，在<code>main.cpp</code>文件中进行更改后，您必须通过运行<code>&#39;make&#39;</code>重新编译聊天程序。</p>
+<p>下面我们用HackRF可视化不同的LoRa扩展项。看看扩频项如何改变数据包传输时间很有意思。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1ft7ba48uqij30dr0fkgnv.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Outernet提供了一个在Dreamcatcher 3上运行的&lt;a href=&quot;https://github.com/Outernet-Project/Dreamcatcher-Packet-Tester&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;LoRa双向开源文本聊天应用程序&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;聊天程序依赖硬件板，所以需要两个Dreamcatcher 3硬件板。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="SDR" scheme="https://www.kanshouce.com/categories/SDR/"/>
+    
+    
+      <category term="SDR" scheme="https://www.kanshouce.com/tags/SDR/"/>
+    
+      <category term="Chat" scheme="https://www.kanshouce.com/tags/Chat/"/>
+    
+  </entry>
   
   <entry>
     <title>Ethereum以太坊白皮书 中文译版</title>
@@ -1040,7 +1093,7 @@
     <published>2017-08-11T17:33:42.000Z</published>
     <updated>2017-08-11T18:12:30.000Z</updated>
     
-    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX1+UEJftk3SCXIYMzcqRQt+LFA0Zn8jGAKz4h54i1t1t7CUuvTUmQljhA38ClXDrwIDDq+roiLx9NGXXN2X2mS8YnDcgJXL489BBDGXZU2ZLeHZelgn12LaRjBLcjGwi1AFEmJxA20G6ejZqhTzy2+oWian5nYOJghOWZ8dqOzF4c/OuX0FyzK2DOke6fvWjUevTNA9r9sS7iyclfPC8SH3M3Z2+brvHNPH+lVoyod4oEVjMz7N1CzFr </div>]]></content>
+    <content type="html"><![CDATA[<script src="/crypto-js.js"></script><script src="/mcommon.js"></script><h3><span id="welcome-to-my-blog-enter-password-to-read">Welcome to my blog, enter password to read.</span></h3><script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script> <div id="security"> <div class="input-container"> <input type="password" class="form-control" id="pass" placeholder=" 请输入密码 "> <label for="pass"> Enter </label> <div class="bottom-line"></div> </div> </div> <div id="encrypt-blog" style="display:none"> U2FsdGVkX19iO+sZwfWwtFS0v3ZU6P0Dq1ZvT7YFcPaxFZjFlLFgoN0vc512jQqNs75M2YEoX3j8f2M0eOhjo/MFrJ5R3NG6BGw+EefI7MMkNvKeYrstWNwGuVb5qe635WBMaOswFhCUil/iKYiVPRn1i1H6kVv3SHmaOhV2THnOBqVI2KaNslBrYyplqnZ+KgzrHG7BqngY+Q5Q8ZElYBEekWoaqj8v+uG8OaIHAVS7Fzm4V63NegUJwUpK/giR </div>]]></content>
     
     <summary type="html">
     
@@ -2074,40 +2127,6 @@
       <category term="SDR" scheme="https://www.kanshouce.com/tags/SDR/"/>
     
       <category term="Hack" scheme="https://www.kanshouce.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>避免被判定为垃圾邮件，提高邮件被接受效率</title>
-    <link href="https://www.kanshouce.com/2017/06/16/emailtester/"/>
-    <id>https://www.kanshouce.com/2017/06/16/emailtester/</id>
-    <published>2017-06-16T09:25:42.000Z</published>
-    <updated>2017-08-08T13:25:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>很多时候采用外部免费的Email企业邮箱会遇到一些问题，比如会被一些外部邮箱判定为垃圾邮件，通过这个网站，可以改进这个问题。</p>
-<p><code>http://www.mail-tester.com</code></p>
-<p>网站每次访问会给出一个临时的邮件地址，向这个邮件地址发送邮件（比如说邀请用户注册的模版、找回密码模版等），发送完成后，可以看到邮件的评分结果。</p>
-<p>这是一个有效提高邮件到达率的方法。</p>
-<a id="more"></a>
-<p><img src="https://pic.kanshouce.com/blog/2017-06-16-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A71111.png" alt=""></p>
-<p>如图所示，最早的时候公司企业邮箱的评分非常低，在经过调整改进后，可以看到明显提升。</p>
-<p><img src="https://pic.kanshouce.com/blog/2017-06-16-%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-16%20%E4%B8%8B%E5%8D%885.24.18.png" alt=""></p>
-<p>实际上此封邮件可以得到7分以上的评价，因为文件内容较少（不足2000字）等问题，没有得到分值。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;很多时候采用外部免费的Email企业邮箱会遇到一些问题，比如会被一些外部邮箱判定为垃圾邮件，通过这个网站，可以改进这个问题。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;http://www.mail-tester.com&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;网站每次访问会给出一个临时的邮件地址，向这个邮件地址发送邮件（比如说邀请用户注册的模版、找回密码模版等），发送完成后，可以看到邮件的评分结果。&lt;/p&gt;
-&lt;p&gt;这是一个有效提高邮件到达率的方法。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Server" scheme="https://www.kanshouce.com/tags/Server/"/>
-    
-      <category term="Email" scheme="https://www.kanshouce.com/tags/Email/"/>
     
   </entry>
   
